@@ -1,0 +1,152 @@
+/* ==========================================================================
+   PCC Integrity — Design Tokens
+   Colors, typography, spacing, radii, shadows, motion.
+   Link this file in every artifact.
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+:root {
+  /* ---------- Colors ---------- */
+  --pcc-red:        #b8233e;
+  --pcc-red-deep:   #8c1a2e;
+  --pcc-red-soft:   #f4d9de;
+
+  --pcc-white:      #ffffff;
+  --pcc-gray-50:    #f6f7f8;
+  --pcc-gray-100:   #eceef1;
+  --pcc-gray-200:   #d9dce1;
+  --pcc-gray-300:   #bcc2cb;
+  --pcc-gray-400:   #9199a3;
+  --pcc-gray-600:   #5b6470;
+  --pcc-gray-800:   #2a2f36;
+  --pcc-ink:        #14181d;
+
+  --pcc-steel:      #2b4a6b; /* secondary accent — blueprint blue */
+  --pcc-signal:     #e0a020; /* warning / attention */
+  --pcc-ok:         #2f7a4a; /* success */
+
+  /* Semantic aliases */
+  --fg-1:  var(--pcc-ink);       /* headings */
+  --fg-2:  var(--pcc-gray-800);  /* body */
+  --fg-3:  var(--pcc-gray-600);  /* secondary */
+  --fg-4:  var(--pcc-gray-400);  /* captions / muted */
+  --bg-1:  var(--pcc-white);
+  --bg-2:  var(--pcc-gray-50);
+  --bg-3:  var(--pcc-gray-100);
+  --bg-ink: var(--pcc-ink);
+
+  --border:       var(--pcc-gray-200);
+  --border-strong: var(--pcc-ink);
+
+  --accent:        var(--pcc-red);
+  --accent-deep:   var(--pcc-red-deep);
+  --accent-soft:   var(--pcc-red-soft);
+
+  /* ---------- Type ---------- */
+  --font-display: "Avenir Next", "Avenir", "Inter", "Helvetica Neue", Arial, sans-serif;
+  --font-body:    "Avenir Next", "Avenir", "Avenir Light", "Inter", "Helvetica Neue", Arial, sans-serif;
+  --font-mono:    "JetBrains Mono", "SF Mono", Menlo, Consolas, monospace;
+
+  --h-display-size: 64px;  --h-display-lh: 1.05;
+  --h1-size: 44px;         --h1-lh: 1.1;
+  --h2-size: 32px;         --h2-lh: 1.15;
+  --h3-size: 24px;         --h3-lh: 1.25;
+  --h4-size: 18px;         --h4-lh: 1.3;
+  --eyebrow-size: 12px;    --eyebrow-lh: 1;
+  --body-lg-size: 18px;    --body-lg-lh: 1.55;
+  --body-size: 16px;       --body-lh: 1.55;
+  --body-sm-size: 14px;    --body-sm-lh: 1.5;
+  --mono-size: 14px;       --mono-lh: 1.4;
+
+  /* ---------- Spacing (4pt) ---------- */
+  --sp-1:  4px;
+  --sp-2:  8px;
+  --sp-3:  12px;
+  --sp-4:  16px;
+  --sp-5:  24px;
+  --sp-6:  32px;
+  --sp-7:  48px;
+  --sp-8:  64px;
+  --sp-9:  96px;
+  --sp-10: 128px;
+
+  /* ---------- Radii ---------- */
+  --radius-sm: 2px;
+  --radius-md: 4px;
+  --radius-lg: 8px;
+  --radius-pill: 999px; /* use only for status chips/tags */
+
+  /* ---------- Shadows ---------- */
+  --shadow-sm: 0 1px 2px rgba(20,24,29,0.06), 0 1px 1px rgba(20,24,29,0.04);
+  --shadow-md: 0 4px 12px rgba(20,24,29,0.08), 0 2px 4px rgba(20,24,29,0.04);
+  --shadow-lg: 0 16px 32px rgba(20,24,29,0.12), 0 4px 8px rgba(20,24,29,0.06);
+
+  /* ---------- Motion ---------- */
+  --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --dur-fast:  150ms;
+  --dur-med:   240ms;
+  --dur-slow:  400ms;
+
+  /* ---------- Layout ---------- */
+  --container-max: 1440px;
+  --container-px: 32px;
+  --nav-height: 72px;
+}
+
+/* ==========================================================================
+   Semantic defaults
+   ========================================================================== */
+html, body {
+  margin: 0;
+  background: var(--bg-1);
+  color: var(--fg-2);
+  font-family: var(--font-body);
+  font-size: var(--body-size);
+  line-height: var(--body-lh);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: var(--fg-1);
+  font-family: var(--font-display);
+  font-weight: 600;
+  margin: 0 0 var(--sp-4) 0;
+  letter-spacing: -0.005em;
+}
+
+h1 { font-size: var(--h1-size); line-height: var(--h1-lh); }
+h2 { font-size: var(--h2-size); line-height: var(--h2-lh); }
+h3 { font-size: var(--h3-size); line-height: var(--h3-lh); }
+h4 { font-size: var(--h4-size); line-height: var(--h4-lh); font-family: var(--font-body); font-weight: 600; letter-spacing: 0; }
+
+p {
+  margin: 0 0 var(--sp-4) 0;
+  color: var(--fg-2);
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+  transition: color var(--dur-fast) var(--ease);
+}
+a:hover { color: var(--accent-deep); text-decoration: underline; }
+
+code, pre, .mono {
+  font-family: var(--font-mono);
+  font-size: var(--mono-size);
+  line-height: var(--mono-lh);
+}
+
+/* Utility classes */
+.display     { font-family: var(--font-display); font-size: var(--h-display-size); line-height: var(--h-display-lh); font-weight: 700; color: var(--fg-1); letter-spacing: -0.02em; }
+.eyebrow     { font-family: var(--font-body); font-size: var(--eyebrow-size); line-height: var(--eyebrow-lh); text-transform: uppercase; letter-spacing: 0.12em; font-weight: 600; color: var(--accent); }
+.body-lg     { font-size: var(--body-lg-size); line-height: var(--body-lg-lh); }
+.body-sm     { font-size: var(--body-sm-size); line-height: var(--body-sm-lh); color: var(--fg-3); }
+.caption     { font-size: 12px; line-height: 1.4; color: var(--fg-4); letter-spacing: 0.02em; }
+
+/* Focus ring — accessibility default */
+:focus-visible {
+  outline: 2px solid color-mix(in oklab, var(--accent), transparent 60%);
+  outline-offset: 2px;
+}

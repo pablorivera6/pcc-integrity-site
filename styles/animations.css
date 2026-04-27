@@ -1,0 +1,353 @@
+/* ==========================================================================
+   PCC Integrity — Animations
+   Subtle, professional, performance-friendly motion language.
+   ========================================================================== */
+
+@media (prefers-reduced-motion: no-preference) {
+
+  /* ---------- Keyframes ---------- */
+  @keyframes pcc-fade-in {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+  @keyframes pcc-fade-up {
+    from { opacity: 0; transform: translate3d(0, 24px, 0); }
+    to   { opacity: 1; transform: translate3d(0, 0, 0); }
+  }
+  @keyframes pcc-fade-up-sm {
+    from { opacity: 0; transform: translate3d(0, 12px, 0); }
+    to   { opacity: 1; transform: translate3d(0, 0, 0); }
+  }
+  @keyframes pcc-fade-right {
+    from { opacity: 0; transform: translate3d(-24px, 0, 0); }
+    to   { opacity: 1; transform: translate3d(0, 0, 0); }
+  }
+  @keyframes pcc-fade-left {
+    from { opacity: 0; transform: translate3d(24px, 0, 0); }
+    to   { opacity: 1; transform: translate3d(0, 0, 0); }
+  }
+  @keyframes pcc-scale-in {
+    from { opacity: 0; transform: scale(0.96); }
+    to   { opacity: 1; transform: scale(1); }
+  }
+  @keyframes pcc-clip-reveal {
+    from { clip-path: inset(0 100% 0 0); }
+    to   { clip-path: inset(0 0 0 0); }
+  }
+  @keyframes pcc-clip-reveal-up {
+    from { clip-path: inset(100% 0 0 0); }
+    to   { clip-path: inset(0 0 0 0); }
+  }
+  @keyframes pcc-line-grow {
+    from { transform: scaleX(0); }
+    to   { transform: scaleX(1); }
+  }
+  @keyframes pcc-image-zoom {
+    from { transform: scale(1.08); }
+    to   { transform: scale(1); }
+  }
+  @keyframes pcc-pulse {
+    0%, 100% { opacity: 0.4; }
+    50%      { opacity: 1; }
+  }
+  @keyframes pcc-pulse-ring {
+    0%   { transform: scale(0.85); opacity: 0.7; }
+    80%  { transform: scale(1.6); opacity: 0; }
+    100% { transform: scale(1.6); opacity: 0; }
+  }
+  @keyframes pcc-blink {
+    0%, 50%, 100% { opacity: 1; }
+    25%, 75%      { opacity: 0.3; }
+  }
+  @keyframes pcc-marquee {
+    from { transform: translate3d(0, 0, 0); }
+    to   { transform: translate3d(-50%, 0, 0); }
+  }
+  @keyframes pcc-shimmer {
+    from { background-position: -200% 0; }
+    to   { background-position: 200% 0; }
+  }
+  @keyframes pcc-arrow-nudge {
+    0%, 100% { transform: translateX(0); }
+    50%      { transform: translateX(3px); }
+  }
+  @keyframes pcc-bar-grow {
+    from { transform: scaleY(0); }
+    to   { transform: scaleY(1); }
+  }
+  @keyframes pcc-rotate-slow {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+  }
+  @keyframes pcc-float {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(-6px); }
+  }
+
+  /* ---------- Reveal-on-scroll utility ---------- */
+  /* Hidden default, animates when [data-reveal] gets .is-in via IntersectionObserver */
+  [data-reveal] {
+    opacity: 0;
+    will-change: opacity, transform;
+  }
+  [data-reveal="fade"]      { /* opacity only */ }
+  [data-reveal="up"]        { transform: translate3d(0, 24px, 0); }
+  [data-reveal="up-sm"]     { transform: translate3d(0, 12px, 0); }
+  [data-reveal="right"]     { transform: translate3d(-24px, 0, 0); }
+  [data-reveal="left"]      { transform: translate3d(24px, 0, 0); }
+  [data-reveal="scale"]     { transform: scale(0.96); }
+  [data-reveal="clip"]      { opacity: 1; clip-path: inset(0 100% 0 0); }
+  [data-reveal="clip-up"]   { opacity: 1; clip-path: inset(100% 0 0 0); }
+  [data-reveal="line"]      { opacity: 1; transform: scaleX(0); transform-origin: left center; }
+  [data-reveal="bar"]       { opacity: 1; transform: scaleY(0); transform-origin: bottom center; }
+  [data-reveal="zoom"]      { opacity: 1; transform: scale(1.08); }
+
+  [data-reveal].is-in {
+    opacity: 1;
+    transform: none;
+    clip-path: inset(0 0 0 0);
+    transition:
+      opacity 700ms cubic-bezier(0.2, 0.8, 0.2, 1),
+      transform 800ms cubic-bezier(0.2, 0.8, 0.2, 1),
+      clip-path 900ms cubic-bezier(0.2, 0.8, 0.2, 1);
+    transition-delay: var(--reveal-delay, 0ms);
+  }
+  [data-reveal="line"].is-in,
+  [data-reveal="bar"].is-in {
+    transition: transform 900ms cubic-bezier(0.2, 0.8, 0.2, 1);
+    transition-delay: var(--reveal-delay, 0ms);
+  }
+
+  /* ---------- Page enter ---------- */
+  [data-page-enter] > * {
+    animation: pcc-fade-up 700ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  }
+  [data-page-enter] > *:nth-child(1) { animation-delay: 0ms; }
+  [data-page-enter] > *:nth-child(2) { animation-delay: 80ms; }
+  [data-page-enter] > *:nth-child(3) { animation-delay: 160ms; }
+
+  /* ---------- Hover lift ---------- */
+  .pcc-lift {
+    transition:
+      transform 300ms cubic-bezier(0.2, 0.8, 0.2, 1),
+      box-shadow 300ms cubic-bezier(0.2, 0.8, 0.2, 1),
+      background 250ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  .pcc-lift:hover {
+    transform: translateY(-3px);
+  }
+
+  /* ---------- Underline link sweep ---------- */
+  .pcc-underline {
+    position: relative;
+    display: inline-block;
+  }
+  .pcc-underline::after {
+    content: '';
+    position: absolute;
+    left: 0; right: 0; bottom: -2px;
+    height: 1px;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: right center;
+    transition: transform 350ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  .pcc-underline:hover::after {
+    transform: scaleX(1);
+    transform-origin: left center;
+  }
+
+  /* ---------- Shimmer hover for images ---------- */
+  .pcc-img-zoom { overflow: hidden; }
+  .pcc-img-zoom > * {
+    transition: transform 800ms cubic-bezier(0.2, 0.8, 0.2, 1), filter 600ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  .pcc-img-zoom:hover > * {
+    transform: scale(1.05);
+  }
+
+  /* ---------- Button shine ---------- */
+  .pcc-btn-shine {
+    position: relative;
+    overflow: hidden;
+  }
+  .pcc-btn-shine::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(110deg, transparent 30%, rgba(255,255,255,0.25) 50%, transparent 70%);
+    transform: translateX(-120%);
+    transition: transform 700ms cubic-bezier(0.2, 0.8, 0.2, 1);
+    pointer-events: none;
+  }
+  .pcc-btn-shine:hover::before {
+    transform: translateX(120%);
+  }
+
+  /* ---------- Arrow icon nudge on parent hover ---------- */
+  .pcc-arrow-host:hover .pcc-arrow,
+  .pcc-arrow-host:hover [data-lucide="arrow-right"],
+  .pcc-arrow-host:hover [data-lucide="arrow-up-right"] {
+    animation: pcc-arrow-nudge 700ms cubic-bezier(0.2, 0.8, 0.2, 1) infinite;
+  }
+
+  /* ---------- Status dot pulse ---------- */
+  .pcc-pulse-dot {
+    position: relative;
+  }
+  .pcc-pulse-dot::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: currentColor;
+    animation: pcc-pulse-ring 2.4s cubic-bezier(0.2, 0.8, 0.2, 1) infinite;
+  }
+
+  /* ---------- Marquee track ---------- */
+  .pcc-marquee {
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+            mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  }
+  .pcc-marquee-track {
+    display: inline-flex;
+    animation: pcc-marquee 60s linear infinite;
+    white-space: nowrap;
+  }
+  .pcc-marquee:hover .pcc-marquee-track {
+    animation-play-state: paused;
+  }
+
+  /* ---------- Stagger helper ---------- */
+  .pcc-stagger > * { --reveal-delay: 0ms; }
+  .pcc-stagger > *:nth-child(1)  { --reveal-delay: 0ms;   }
+  .pcc-stagger > *:nth-child(2)  { --reveal-delay: 70ms;  }
+  .pcc-stagger > *:nth-child(3)  { --reveal-delay: 140ms; }
+  .pcc-stagger > *:nth-child(4)  { --reveal-delay: 210ms; }
+  .pcc-stagger > *:nth-child(5)  { --reveal-delay: 280ms; }
+  .pcc-stagger > *:nth-child(6)  { --reveal-delay: 350ms; }
+  .pcc-stagger > *:nth-child(7)  { --reveal-delay: 420ms; }
+  .pcc-stagger > *:nth-child(8)  { --reveal-delay: 490ms; }
+  .pcc-stagger > *:nth-child(9)  { --reveal-delay: 560ms; }
+  .pcc-stagger > *:nth-child(10) { --reveal-delay: 630ms; }
+  .pcc-stagger > *:nth-child(11) { --reveal-delay: 700ms; }
+  .pcc-stagger > *:nth-child(12) { --reveal-delay: 770ms; }
+  .pcc-stagger > *:nth-child(13) { --reveal-delay: 840ms; }
+  .pcc-stagger > *:nth-child(14) { --reveal-delay: 910ms; }
+  .pcc-stagger > *:nth-child(15) { --reveal-delay: 980ms; }
+  .pcc-stagger > *:nth-child(16) { --reveal-delay: 1050ms;}
+
+  /* ---------- Nav link active underline grow ---------- */
+  .pcc-nav-link {
+    position: relative;
+  }
+  .pcc-nav-link::after {
+    content: '';
+    position: absolute;
+    left: 0; right: 0; bottom: -1px;
+    height: 1px;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform 280ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  .pcc-nav-link:hover::after { transform: scaleX(1); }
+
+  /* ---------- Form input focus glow ---------- */
+  .pcc-input {
+    transition: border-color 200ms cubic-bezier(0.2, 0.8, 0.2, 1),
+                box-shadow 200ms cubic-bezier(0.2, 0.8, 0.2, 1),
+                background 200ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  .pcc-input:focus {
+    box-shadow: 0 0 0 3px color-mix(in oklab, var(--accent), transparent 80%);
+  }
+
+  /* ---------- Tabs ---------- */
+  .pcc-tab-indicator {
+    transition: transform 350ms cubic-bezier(0.2, 0.8, 0.2, 1),
+                width 350ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+
+  /* ---------- Bordered card hover (top accent line) ---------- */
+  .pcc-card-accent {
+    position: relative;
+    transition: background 250ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  .pcc-card-accent::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0;
+    height: 2px;
+    width: 100%;
+    background: var(--accent);
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform 400ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  .pcc-card-accent:hover::before { transform: scaleX(1); }
+  .pcc-card-accent:hover { background: var(--bg-2); }
+
+  /* ---------- Hero parallax bg micro-animation ---------- */
+  .pcc-hero-bg {
+    animation: pcc-image-zoom 1600ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  }
+
+  /* ---------- Float (decorative) ---------- */
+  .pcc-float { animation: pcc-float 5s ease-in-out infinite; }
+  .pcc-spin-slow { animation: pcc-rotate-slow 40s linear infinite; }
+  .pcc-blink { animation: pcc-blink 2.4s ease-in-out infinite; }
+
+  /* ---------- Page content fade-in (initial mount) ---------- */
+  .pcc-page-fade {
+    animation: pcc-fade-up 600ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  }
+
+  /* ---------- Nav enter ---------- */
+  .pcc-nav-enter {
+    animation: pcc-fade-up-sm 500ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  }
+  .pcc-logo-link img,
+  .pcc-logo-link svg {
+    transition: transform 350ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  .pcc-logo-link:hover img,
+  .pcc-logo-link:hover svg {
+    transform: rotate(-6deg) scale(1.04);
+  }
+
+  /* ---------- CTA button shine + lift ---------- */
+  .pcc-cta-btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(110deg, transparent 30%, rgba(255,255,255,0.28) 50%, transparent 70%);
+    transform: translateX(-120%);
+    transition: transform 700ms cubic-bezier(0.2, 0.8, 0.2, 1);
+    pointer-events: none;
+  }
+  .pcc-cta-btn:hover::before { transform: translateX(120%); }
+  .pcc-cta-btn:hover { transform: translateY(-1px); }
+  .pcc-cta-btn:active { transform: translateY(0); }
+
+  /* ---------- Footer link hover ---------- */
+  .pcc-foot-link:hover {
+    color: #fff !important;
+    padding-left: 4px;
+  }
+
+  /* ---------- Footer social hover ---------- */
+  .pcc-social:hover {
+    background: var(--accent);
+    border-color: var(--accent) !important;
+    color: #fff !important;
+  }
+}
+
+/* Reduced motion: disable everything */
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal] { opacity: 1 !important; transform: none !important; clip-path: none !important; }
+  .pcc-marquee-track { animation: none !important; }
+  .pcc-hero-bg, .pcc-page-fade { animation: none !important; }
+}
