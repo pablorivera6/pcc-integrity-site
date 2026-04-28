@@ -8,9 +8,9 @@
 
 :root {
   /* ---------- Colors ---------- */
-  --pcc-red:        #b8233e;
-  --pcc-red-deep:   #8c1a2e;
-  --pcc-red-soft:   #f4d9de;
+  --pcc-red:        #d50032;  /* PANTONE 206 C */
+  --pcc-red-deep:   #b00033;
+  --pcc-red-soft:   #fbd5de;
 
   --pcc-white:      #ffffff;
   --pcc-gray-50:    #f6f7f8;

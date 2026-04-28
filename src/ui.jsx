@@ -88,8 +88,8 @@ function Tag({ children, dark }) {
 
 function LogoMark({ size = 32, variant = 'red' }) {
   const src = variant === 'white'
-    ? 'assets/logo-pcc-inverted.png'
-    : 'assets/logo-pcc-mark.png';
+    ? 'assets/logo-pcc-inverted.png?v=2'
+    : 'assets/logo-pcc-mark.png?v=2';
   return <img src={src} alt="PCC Integrity" style={{ height: size, width: 'auto', display: 'block' }}/>;
 }
 

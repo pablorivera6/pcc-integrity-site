@@ -5,23 +5,28 @@ function HomePage({ lang, onNav, setIndustry }) {
 
   return <>
     {/* HERO */}
-    <section data-screen-label="Home/Hero" style={{ position:'relative', minHeight: 720, background:'#0d1015', color:'#fff', overflow:'hidden' }}>
-      <div className="pcc-hero-bg" style={{ position:'absolute', inset: 0 }}>
-        <CorrosionAnimation height="100%"/>
+    <section data-screen-label="Home/Hero" style={{ position:'relative', minHeight: 760, background:'#0d1015', color:'#fff', overflow:'hidden' }}>
+      {/* Right-side: animation as protagonist */}
+      <div className="pcc-hero-bg" style={{ position:'absolute', top: 0, bottom: 0, right: 0, width: '58%' }}>
+        <HeroBackgroundCycle lang={lang}/>
       </div>
-      <div style={{ position:'absolute', inset: 0, background:'linear-gradient(120deg, rgba(13,16,21,0.92) 0%, rgba(13,16,21,0.55) 55%, rgba(13,16,21,0.78) 100%)' }}/>
-      <Container wide style={{ position:'relative', paddingTop: 120, paddingBottom: 96, minHeight: 720, display:'flex', flexDirection:'column', justifyContent:'space-between' }}>
-        <div style={{ maxWidth: 1080 }}>
+      {/* Left-side solid panel for text — fades into the animation */}
+      <div style={{ position:'absolute', inset: 0, background:'linear-gradient(90deg, rgba(13,16,21,1) 0%, rgba(13,16,21,1) 38%, rgba(13,16,21,0.55) 50%, rgba(13,16,21,0) 62%)', pointerEvents:'none' }}/>
+      {/* Bottom soft fade so the strip at the bottom is readable */}
+      <div style={{ position:'absolute', left:0, right:0, bottom:0, height: 140, background:'linear-gradient(0deg, rgba(13,16,21,0.85) 0%, rgba(13,16,21,0) 100%)', pointerEvents:'none' }}/>
+
+      <Container wide style={{ position:'relative', paddingTop: 120, paddingBottom: 96, minHeight: 760, display:'flex', flexDirection:'column', justifyContent:'space-between' }}>
+        <div style={{ maxWidth: 620 }}>
           <div className="pcc-page-fade" style={{ animationDelay:'40ms' }}><Eyebrow dark>{C.eyebrow}</Eyebrow></div>
           <h1 className="pcc-page-fade" style={{
             fontFamily:'var(--font-display)', fontWeight: 700,
-            fontSize: 'clamp(48px, 6vw, 88px)', lineHeight: 1.02, letterSpacing:'-0.025em',
-            color:'#fff', margin:'0 0 32px', textWrap:'balance',
+            fontSize: 'clamp(40px, 4.4vw, 68px)', lineHeight: 1.04, letterSpacing:'-0.025em',
+            color:'#fff', margin:'0 0 28px', textWrap:'balance',
             animationDelay:'120ms',
           }}>
             {C.hTitleA} <span style={{ color: 'var(--accent)' }}>{C.hTitleB}</span> {C.hTitleC}
           </h1>
-          <p className="pcc-page-fade" style={{ fontSize: 19, lineHeight: 1.55, color:'rgba(255,255,255,0.78)', maxWidth: 680, marginBottom: 40, animationDelay:'220ms' }}>
+          <p className="pcc-page-fade" style={{ fontSize: 17, lineHeight: 1.55, color:'rgba(255,255,255,0.78)', maxWidth: 540, marginBottom: 36, animationDelay:'220ms' }}>
             {C.hSub}
           </p>
           <div className="pcc-page-fade" style={{ display:'flex', gap: 12, flexWrap:'wrap', animationDelay:'320ms' }}>
@@ -34,12 +39,44 @@ function HomePage({ lang, onNav, setIndustry }) {
             <span style={{ width: 8, height: 8, borderRadius: '50%', background: 'var(--accent)', display:'inline-block' }} className="pcc-blink"/>
             {C.heroCaption}
           </div>
-          <div style={{ display:'flex', gap: 32, fontSize: 11, color:'rgba(255,255,255,0.5)', letterSpacing:'0.14em', textTransform:'uppercase', fontWeight: 600 }}>
-            <span>NACE CP-4</span>
-            <span>ISO 9001</span>
-            <span>ISO 14001</span>
-            <span>ISO 45001</span>
-          </div>
+        </div>
+      </Container>
+    </section>
+
+    {/* BRAND STATEMENT — large logo as graphic + manifesto */}
+    <section data-screen-label="Home/BrandStatement" style={{ background:'#fff', borderBottom:'1px solid var(--border)', position:'relative', overflow:'hidden' }}>
+      <Container wide style={{ padding:'96px 32px' }}>
+        <div style={{ display:'grid', gridTemplateColumns:'minmax(280px, 1fr) 2fr', gap: 72, alignItems:'center' }}>
+          <Reveal kind="scale" style={{ position:'relative', display:'flex', alignItems:'center', justifyContent:'center', minHeight: 360 }}>
+            <img src="assets/logo-pcc-mark.png?v=2" alt="PCC Integrity" style={{ width: 240, height: 'auto' }}/>
+          </Reveal>
+          <Reveal kind="up" delay={120}>
+            <div style={{ fontFamily:'var(--font-mono)', fontSize: 11, letterSpacing:'0.2em', color:'var(--accent)', fontWeight: 600, textTransform:'uppercase', marginBottom: 20 }}>
+              {lang === 'es' ? 'Nuestra firma de ingeniería' : 'Our engineering signature'}
+            </div>
+            <h2 style={{ fontFamily:'var(--font-display)', fontWeight: 600, fontSize:'clamp(36px, 4.4vw, 64px)', lineHeight: 1.05, letterSpacing:'-0.02em', margin:'0 0 28px', color:'var(--fg-1)', textWrap:'balance' }}>
+              {lang === 'es'
+                ? <>Ingeniería en <span style={{ color:'var(--accent)' }}>protección catódica</span> para activos críticos de las Américas.</>
+                : <><span style={{ color:'var(--accent)' }}>Cathodic protection</span> engineering for critical assets across the Americas.</>}
+            </h2>
+            <p style={{ fontSize: 17, lineHeight: 1.6, color:'var(--fg-3)', maxWidth: 620, margin:'0 0 32px' }}>
+              {lang === 'es'
+                ? 'Una sola firma de ingeniería —diseño, suministro, instalación e inspección— al servicio de los operadores que mueven la energía, el agua y la industria de las Américas.'
+                : 'A single engineering signature —design, supply, installation and inspection— in service of the operators that move the energy, water and industry of the Americas.'}
+            </p>
+            <div style={{ display:'flex', gap: 32, flexWrap:'wrap', borderTop:'1px solid var(--border)', paddingTop: 24 }}>
+              {[
+                { k: lang === 'es' ? 'Ingeniería' : 'Engineering', v: 'NACE CP-4' },
+                { k: lang === 'es' ? 'Cobertura' : 'Coverage',     v: 'CO · PE · USA' },
+                { k: lang === 'es' ? 'Trayectoria' : 'Track record', v: '47 años' },
+              ].map(x => (
+                <div key={x.k}>
+                  <div style={{ fontFamily:'var(--font-mono)', fontSize: 10.5, letterSpacing:'0.16em', textTransform:'uppercase', color:'var(--fg-4)', marginBottom: 6, fontWeight: 600 }}>{x.k}</div>
+                  <div style={{ fontFamily:'var(--font-display)', fontSize: 18, fontWeight: 600, color:'var(--fg-1)', letterSpacing:'-0.005em' }}>{x.v}</div>
+                </div>
+              ))}
+            </div>
+          </Reveal>
         </div>
       </Container>
     </section>

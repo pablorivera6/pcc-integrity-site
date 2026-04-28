@@ -20,18 +20,18 @@ function Nav({ current, onNav, lang, setLang, dark }) {
   return (
     <nav className="pcc-nav-enter" style={{
       position: 'sticky', top: 0, zIndex: 50,
-      height: 76, background: bg,
+      height: 88, background: bg,
       backdropFilter: 'blur(10px)',
       WebkitBackdropFilter: 'blur(10px)',
       borderBottom: border,
       transition: 'background 200ms var(--ease)',
     }}>
       <Container wide style={{ height: '100%', display:'flex', alignItems:'center', justifyContent:'space-between', gap: 24 }}>
-        <a onClick={() => onNav('home')} className="pcc-logo-link" style={{ display:'flex', alignItems:'center', gap: 14, cursor:'pointer', textDecoration:'none', flexShrink: 0 }}>
-          <LogoMark size={42} variant={dark ? 'white' : 'red'}/>
-          <div>
-            <div style={{ fontFamily: 'var(--font-display)', fontSize: 18, fontWeight: 700, letterSpacing: '0.04em', color: dark ? '#fff' : 'var(--fg-1)', lineHeight: 1 }}>PCC INTEGRITY</div>
-            <div style={{ fontFamily:'var(--font-body)', fontSize: 9.5, color: dark ? 'rgba(255,255,255,0.5)' : 'var(--fg-4)', letterSpacing: '0.18em', textTransform:'uppercase', marginTop: 5, fontWeight: 500 }}>{lang === 'es' ? 'Protección Catódica · 1978' : 'Cathodic Protection · 1978'}</div>
+        <a onClick={() => onNav('home')} className="pcc-logo-link" style={{ display:'flex', alignItems:'center', gap: 16, cursor:'pointer', textDecoration:'none', flexShrink: 0 }}>
+          <LogoMark size={56} variant={dark ? 'white' : 'red'}/>
+          <div style={{ borderLeft: dark ? '1px solid rgba(255,255,255,0.18)' : '1px solid var(--border)', paddingLeft: 16 }}>
+            <div style={{ fontFamily: 'var(--font-display)', fontSize: 20, fontWeight: 700, letterSpacing: '0.05em', color: dark ? '#fff' : 'var(--fg-1)', lineHeight: 1 }}>PCC INTEGRITY</div>
+            <div style={{ fontFamily:'var(--font-body)', fontSize: 9.5, color: dark ? 'rgba(255,255,255,0.55)' : 'var(--fg-4)', letterSpacing: '0.22em', textTransform:'uppercase', marginTop: 6, fontWeight: 600 }}>{lang === 'es' ? 'Protección Catódica · Est. 1978' : 'Cathodic Protection · Est. 1978'}</div>
           </div>
         </a>
         <ul style={{ listStyle:'none', display:'flex', gap: 26, margin:0, padding:0, flex: 1, justifyContent:'center' }}>
@@ -93,11 +93,11 @@ function Footer({ lang, onNav }) {
       <Container wide>
         <Reveal as="div" kind="fade" stagger style={{ display:'grid', gridTemplateColumns:'1.4fr repeat(3, 1fr)', gap: 56, paddingBottom: 56 }}>
           <Reveal as="div" kind="up">
-            <div style={{ display:'flex', alignItems:'center', gap: 12, marginBottom: 20 }}>
-              <LogoMark size={44} variant="white"/>
-              <div>
-                <div style={{ fontFamily:'var(--font-display)', fontSize: 22, fontWeight: 700, color:'#fff', letterSpacing:'0.04em', lineHeight: 1 }}>PCC INTEGRITY</div>
-                <div style={{ fontSize: 10.5, letterSpacing:'0.16em', textTransform:'uppercase', color:'rgba(255,255,255,0.5)', marginTop: 5 }}>{lang === 'es' ? 'Protección Catódica · 1978' : 'Cathodic Protection · 1978'}</div>
+            <div style={{ display:'flex', alignItems:'center', gap: 16, marginBottom: 24 }}>
+              <LogoMark size={64} variant="white"/>
+              <div style={{ borderLeft: '1px solid rgba(255,255,255,0.18)', paddingLeft: 16 }}>
+                <div style={{ fontFamily:'var(--font-display)', fontSize: 26, fontWeight: 700, color:'#fff', letterSpacing:'0.05em', lineHeight: 1 }}>PCC INTEGRITY</div>
+                <div style={{ fontSize: 11, letterSpacing:'0.2em', textTransform:'uppercase', color:'rgba(255,255,255,0.55)', marginTop: 7, fontWeight: 600 }}>{lang === 'es' ? 'Protección Catódica · Est. 1978' : 'Cathodic Protection · Est. 1978'}</div>
               </div>
             </div>
             <p style={{ fontSize: 14, lineHeight: 1.65, maxWidth: 360, margin: '0 0 24px', color:'rgba(255,255,255,0.65)' }}>
