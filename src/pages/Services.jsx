@@ -10,7 +10,7 @@ function ServicesPage({ lang, onNav, initial }) {
   return <>
     <section style={{ background:'#fff', borderBottom:'1px solid var(--border)' }}>
       <Container wide style={{ padding:'120px 32px 80px' }}>
-        <div style={{ display:'grid', gridTemplateColumns:'1fr 1.6fr', gap: 80, alignItems:'start' }}>
+        <div className="pcc-page-header" style={{ display:'grid', gridTemplateColumns:'1fr 1.6fr', gap: 80, alignItems:'start' }}>
           <Reveal kind="right">
             <Eyebrow>{C.eyebrow}</Eyebrow>
             <div style={{ fontFamily:'var(--font-mono)', fontSize: 12, color:'var(--fg-4)', letterSpacing:'0.08em', marginTop: 32 }}>04 {lang === 'es' ? 'INDUSTRIAS · UN EQUIPO' : 'INDUSTRIES · ONE TEAM'}</div>
@@ -57,7 +57,7 @@ function ServicesPage({ lang, onNav, initial }) {
 
     {/* split detail */}
     <section style={{ background:'#fff' }}>
-      <div key={active} style={{ display:'grid', gridTemplateColumns:'1fr 1fr', minHeight: 720 }}>
+      <div key={active} className="pcc-service-panel" style={{ display:'grid', gridTemplateColumns:'1fr 1fr', minHeight: 720 }}>
         <div className="pcc-page-fade" style={{ position:'relative', animationDelay:'0ms' }}>
           {ind.photo
             ? <div style={{ position:'absolute', inset:0, overflow:'hidden', background:'#0d1015' }}>
@@ -99,7 +99,7 @@ function ServicesPage({ lang, onNav, initial }) {
           <Eyebrow>{lang === 'es' ? 'METODOLOGÍA' : 'METHODOLOGY'}</Eyebrow>
           <h2 style={{ fontFamily:'var(--font-display)', fontWeight: 600, fontSize:'clamp(36px, 4vw, 56px)', lineHeight: 1.05, letterSpacing:'-0.02em', margin: 0, maxWidth: 800 }}>{lang === 'es' ? 'Cómo trabajamos un proyecto, paso a paso.' : 'How we run a project, step by step.'}</h2>
         </Reveal>
-        <Reveal as="div" kind="fade" stagger style={{ display:'grid', gridTemplateColumns:'repeat(5, 1fr)', gap: 1, background:'var(--border)', border:'1px solid var(--border)' }}>
+        <Reveal as="div" kind="fade" stagger className="pcc-grid-4" style={{ display:'grid', gridTemplateColumns:'repeat(5, 1fr)', gap: 1, background:'var(--border)', border:'1px solid var(--border)' }}>
           {[
             { es:'Levantamiento', en:'Assessment', esD:'Inspección de campo, planos, mediciones eléctricas y de suelo.', enD:'Field inspection, drawings, electrical and soil measurements.' },
             { es:'Diseño', en:'Design', esD:'Cálculo de demanda, dimensionamiento de ánodos y rectificadores.', enD:'Demand calculation, anode and rectifier sizing.' },

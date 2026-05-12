@@ -1,0 +1,159 @@
+/* ======================================================================
+   PCC Integrity — Mobile & Responsive Overrides
+   Breakpoints: nav ≤960px | tablet ≤1024px | phone ≤768px | xs ≤480px
+   ====================================================================== */
+
+/* ---------- Navigation ---------- */
+.pcc-hamburger {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+@media (max-width: 960px) {
+  .pcc-nav-links,
+  .pcc-nav-right {
+    display: none !important;
+  }
+  .pcc-hamburger {
+    display: flex;
+  }
+}
+
+/* ---------- Footer ---------- */
+@media (max-width: 768px) {
+  .pcc-footer-grid {
+    grid-template-columns: 1fr !important;
+    gap: 36px !important;
+  }
+  .pcc-footer-bottom {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 8px !important;
+  }
+}
+
+/* ---------- Home: Stat Band (4 → 2 cols) ---------- */
+@media (max-width: 768px) {
+  .pcc-stat-band {
+    grid-template-columns: 1fr 1fr !important;
+  }
+  .pcc-stat-band > * {
+    border-right: none !important;
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+    padding-top: 40px !important;
+    padding-bottom: 40px !important;
+  }
+  .pcc-stat-band > *:nth-child(odd) {
+    border-right: 1px solid var(--border) !important;
+  }
+  .pcc-stat-band > *:nth-last-child(-n+2) {
+    border-bottom: none !important;
+  }
+}
+
+/* ---------- 2-column grids → 1 column on mobile ---------- */
+@media (max-width: 768px) {
+  .pcc-grid-2 {
+    grid-template-columns: 1fr !important;
+    gap: 32px !important;
+  }
+}
+
+/* ---------- 4 / 5-column grids → 2 cols on tablet, 1 col on phone ---------- */
+@media (max-width: 1024px) {
+  .pcc-grid-4 {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 4px !important;
+  }
+}
+@media (max-width: 480px) {
+  .pcc-grid-4 {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* ---------- 3-column grids → 1 column on mobile ---------- */
+@media (max-width: 768px) {
+  .pcc-grid-3 {
+    grid-template-columns: 1fr !important;
+    gap: 24px !important;
+  }
+}
+
+/* ---------- Page header grids (1fr 1.6fr) → 1 column ---------- */
+@media (max-width: 768px) {
+  .pcc-page-header {
+    grid-template-columns: 1fr !important;
+    gap: 24px !important;
+  }
+  .pcc-page-header > *:first-child {
+    min-height: auto !important;
+  }
+}
+
+/* ---------- Industry cards (2-col) → 1 column on mobile ---------- */
+@media (max-width: 768px) {
+  .pcc-industry-cards {
+    grid-template-columns: 1fr !important;
+  }
+  .pcc-industry-cards > * {
+    min-height: 280px !important;
+  }
+}
+
+/* ---------- Services: active industry panel ---------- */
+@media (max-width: 768px) {
+  .pcc-service-panel {
+    grid-template-columns: 1fr !important;
+    min-height: auto !important;
+  }
+  .pcc-service-panel > *:last-child {
+    display: none !important;
+  }
+}
+
+/* ---------- Experience: project rows ---------- */
+@media (max-width: 768px) {
+  .pcc-project-row {
+    grid-template-columns: 1fr !important;
+  }
+  .pcc-project-row > *:last-child {
+    display: none !important;
+  }
+}
+
+/* ---------- Hero section ---------- */
+@media (max-width: 768px) {
+  .pcc-hero-bg {
+    width: 100% !important;
+    opacity: 0.2;
+  }
+}
+
+/* ---------- Container padding ---------- */
+@media (max-width: 768px) {
+  .pcc-container {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+}
+
+/* ---------- General section padding ---------- */
+@media (max-width: 768px) {
+  .pcc-section-xl { padding-top: 64px !important; padding-bottom: 64px !important; }
+}
+
+/* ---------- Reduce oversized padding in specific containers ---------- */
+@media (max-width: 768px) {
+  .pcc-brand-container {
+    padding-top: 56px !important;
+    padding-bottom: 56px !important;
+  }
+}

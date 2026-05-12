@@ -4,7 +4,7 @@ const { useState, useEffect, useRef } = React;
 // ---------- Shared primitives ----------
 function Container({ children, style, wide }) {
   return (
-    <div style={{
+    <div className="pcc-container" style={{
       maxWidth: wide ? 1440 : 1280, margin: '0 auto',
       padding: '0 32px',
       ...style

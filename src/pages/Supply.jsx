@@ -6,7 +6,7 @@ function SupplyPage({ lang, onNav }) {
   return <>
     <section style={{ background:'#fff', borderBottom:'1px solid var(--border)' }}>
       <Container wide style={{ padding:'120px 32px 80px' }}>
-        <div style={{ display:'grid', gridTemplateColumns:'1fr 1.6fr', gap: 80, alignItems:'start' }}>
+        <div className="pcc-page-header" style={{ display:'grid', gridTemplateColumns:'1fr 1.6fr', gap: 80, alignItems:'start' }}>
           <div>
             <Eyebrow>{C.eyebrow}</Eyebrow>
             <div style={{ fontFamily:'var(--font-mono)', fontSize: 12, color:'var(--fg-4)', letterSpacing:'0.08em', marginTop: 32 }}>{lang === 'es' ? '12 CATEGORÍAS DE PRODUCTO' : '12 PRODUCT CATEGORIES'}</div>
@@ -29,7 +29,7 @@ function SupplyPage({ lang, onNav }) {
             <p style={{ fontSize: 16, color:'var(--fg-3)', maxWidth: 580, marginTop: 16 }}>{C.rectifiersSub}</p>
           </div>
         </div>
-        <div style={{ display:'grid', gridTemplateColumns:'repeat(5, 1fr)', gap: 4, background:'var(--border)', border:'1px solid var(--border)' }}>
+        <div className="pcc-grid-4" style={{ display:'grid', gridTemplateColumns:'repeat(5, 1fr)', gap: 4, background:'var(--border)', border:'1px solid var(--border)' }}>
           {D.products.map((p, i) => (
             <article key={p.sku} style={{ background:'#fff', padding: 28, display:'flex', flexDirection:'column', gap: 16, minHeight: 360, cursor:'pointer', transition:'background 200ms var(--ease)' }}
               onMouseEnter={e => e.currentTarget.style.background = 'var(--bg-2)'}
@@ -60,7 +60,7 @@ function SupplyPage({ lang, onNav }) {
           <Eyebrow>{C.categoriesTitle}</Eyebrow>
           <h2 style={{ fontFamily:'var(--font-display)', fontWeight: 600, fontSize:'clamp(36px, 4vw, 56px)', lineHeight: 1.05, letterSpacing:'-0.02em', margin: 0, maxWidth: 800 }}>{lang === 'es' ? 'Todo lo que un sistema de protección catódica necesita.' : 'Everything a cathodic protection system needs.'}</h2>
         </div>
-        <div style={{ display:'grid', gridTemplateColumns:'repeat(4, 1fr)', gap: 1, background:'var(--border)', border:'1px solid var(--border)' }}>
+        <div className="pcc-grid-4" style={{ display:'grid', gridTemplateColumns:'repeat(4, 1fr)', gap: 1, background:'var(--border)', border:'1px solid var(--border)' }}>
           {D.supplyCats.map((c, i) => (
             <div key={c.id} style={{ background:'#fff', padding:'32px 28px', minHeight: 220 }}>
               <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between', marginBottom: 20 }}>
@@ -80,7 +80,7 @@ function SupplyPage({ lang, onNav }) {
     {/* CTA */}
     <section style={{ padding:'120px 0', background:'#fff', borderTop:'1px solid var(--border)' }}>
       <Container wide>
-        <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap: 80, alignItems:'center' }}>
+        <div className="pcc-grid-2" style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap: 80, alignItems:'center' }}>
           <Reveal kind="right">
             <Eyebrow>{lang === 'es' ? 'COTIZACIÓN' : 'QUOTATION'}</Eyebrow>
             <h2 style={{ fontFamily:'var(--font-display)', fontWeight: 600, fontSize:'clamp(32px, 3.6vw, 52px)', lineHeight: 1.1, letterSpacing:'-0.02em', margin:'0 0 24px', textWrap:'balance' }}>{lang === 'es' ? '¿Necesita una lista de materiales para su proyecto?' : 'Need a bill of materials for your project?'}</h2>

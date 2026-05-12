@@ -46,7 +46,7 @@ function HomePage({ lang, onNav, setIndustry }) {
     {/* BRAND STATEMENT — large logo as graphic + manifesto */}
     <section data-screen-label="Home/BrandStatement" style={{ background:'#fff', borderBottom:'1px solid var(--border)', position:'relative', overflow:'hidden' }}>
       <Container wide style={{ padding:'96px 32px' }}>
-        <div style={{ display:'grid', gridTemplateColumns:'minmax(280px, 1fr) 2fr', gap: 72, alignItems:'center' }}>
+        <div className="pcc-grid-2" style={{ display:'grid', gridTemplateColumns:'minmax(280px, 1fr) 2fr', gap: 72, alignItems:'center' }}>
           <Reveal kind="scale" style={{ position:'relative', display:'flex', alignItems:'center', justifyContent:'center', minHeight: 360 }}>
             <img src="assets/logo-pcc-mark.png?v=2" alt="PCC Integrity" style={{ width: 240, height: 'auto' }}/>
           </Reveal>
@@ -84,7 +84,7 @@ function HomePage({ lang, onNav, setIndustry }) {
     {/* STAT BAND */}
     <section style={{ background:'#fff', borderBottom:'1px solid var(--border)' }}>
       <Container wide>
-        <Reveal as="div" kind="fade" stagger style={{ display:'grid', gridTemplateColumns:'repeat(4, 1fr)' }}>
+        <Reveal as="div" kind="fade" stagger className="pcc-stat-band" style={{ display:'grid', gridTemplateColumns:'repeat(4, 1fr)' }}>
           {[
             { num:'1978', es:'Año de fundación', en:'Founded', count: 1978 },
             { num:'+550', es:'Proyectos entregados', en:'Projects delivered', count: 550, prefix:'+' },
@@ -107,7 +107,7 @@ function HomePage({ lang, onNav, setIndustry }) {
     {/* INDUSTRIES — full bleed cards */}
     <section style={{ padding:'120px 0 0', background:'var(--bg-2)' }}>
       <Container wide style={{ marginBottom: 56 }}>
-        <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap: 56, alignItems:'end' }}>
+        <div className="pcc-grid-2" style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap: 56, alignItems:'end' }}>
           <Reveal kind="up">
             <Eyebrow>{C.sectorEyebrow}</Eyebrow>
             <h2 style={{ fontFamily:'var(--font-display)', fontWeight: 600, fontSize:'clamp(36px, 4vw, 56px)', lineHeight: 1.05, letterSpacing:'-0.02em', margin: 0, textWrap:'balance' }}>
@@ -118,7 +118,7 @@ function HomePage({ lang, onNav, setIndustry }) {
         </div>
       </Container>
       <Container wide>
-        <Reveal as="div" kind="fade" stagger style={{ display:'grid', gridTemplateColumns:'repeat(2, 1fr)', gap: 4, marginBottom: 0 }}>
+        <Reveal as="div" kind="fade" stagger className="pcc-industry-cards" style={{ display:'grid', gridTemplateColumns:'repeat(2, 1fr)', gap: 4, marginBottom: 0 }}>
           {D.industries.map((ind) => (
             <Reveal as="article" kind="up" key={ind.id}
               onClick={() => { setIndustry(ind.id); onNav('services'); }}
@@ -153,14 +153,14 @@ function HomePage({ lang, onNav, setIndustry }) {
     {/* SERVICE LINES */}
     <section style={{ padding:'120px 0', background:'var(--bg-2)' }}>
       <Container wide>
-        <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap: 56, alignItems:'end', marginBottom: 56 }}>
+        <div className="pcc-grid-2" style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap: 56, alignItems:'end', marginBottom: 56 }}>
           <div>
             <Eyebrow>{C.lineEyebrow}</Eyebrow>
             <h2 style={{ fontFamily:'var(--font-display)', fontWeight: 600, fontSize:'clamp(36px, 4vw, 56px)', lineHeight: 1.05, letterSpacing:'-0.02em', margin: 0, textWrap:'balance' }}>{C.lineTitle}</h2>
           </div>
           <p style={{ fontSize: 17, lineHeight: 1.6, color:'var(--fg-3)', margin: 0 }}>{C.lineSub}</p>
         </div>
-        <Reveal as="div" kind="fade" stagger style={{ display:'grid', gridTemplateColumns:'repeat(4, 1fr)', gap: 4, background:'var(--border)' }}>
+        <Reveal as="div" kind="fade" stagger className="pcc-grid-4" style={{ display:'grid', gridTemplateColumns:'repeat(4, 1fr)', gap: 4, background:'var(--border)' }}>
           {D.serviceLines.map((sl, i) => (
             <Reveal as="div" kind="up" key={sl.id} className="pcc-card-accent" style={{ background:'#fff', padding:'40px 32px 36px', minHeight: 280, position:'relative', display:'flex', flexDirection:'column' }}>
               <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between', marginBottom: 24 }}>
@@ -191,7 +191,7 @@ function HomePage({ lang, onNav, setIndustry }) {
 
       <Container wide style={{ position:'relative' }}>
         {/* Header */}
-        <div style={{ display:'grid', gridTemplateColumns:'1fr 2fr', gap: 56, alignItems:'end', marginBottom: 56 }}>
+        <div className="pcc-grid-2" style={{ display:'grid', gridTemplateColumns:'1fr 2fr', gap: 56, alignItems:'end', marginBottom: 56 }}>
           <div>
             <div style={{ fontFamily:'var(--font-mono)', fontSize: 11, letterSpacing:'0.18em', textTransform:'uppercase', color:'var(--accent)', fontWeight: 600, marginBottom: 16 }}>{C.proofEyebrow}</div>
             <div style={{ fontFamily:'var(--font-mono)', fontSize: 12, color:'rgba(255,255,255,0.45)', letterSpacing:'0.08em' }}>{lang === 'es' ? '16 OPERADORES · 4 INDUSTRIAS · 3 PAÍSES' : '16 OPERATORS · 4 INDUSTRIES · 3 COUNTRIES'}</div>
@@ -204,7 +204,7 @@ function HomePage({ lang, onNav, setIndustry }) {
         </div>
 
         {/* KPI strip */}
-        <Reveal as="div" kind="fade" stagger style={{ display:'grid', gridTemplateColumns:'repeat(4, 1fr)', gap: 0, borderTop:'1px solid rgba(255,255,255,0.12)', borderBottom:'1px solid rgba(255,255,255,0.12)', marginBottom: 64 }}>
+        <Reveal as="div" kind="fade" stagger className="pcc-grid-4" style={{ display:'grid', gridTemplateColumns:'repeat(4, 1fr)', gap: 0, borderTop:'1px solid rgba(255,255,255,0.12)', borderBottom:'1px solid rgba(255,255,255,0.12)', marginBottom: 64 }}>
           {[
             { count: 40, suffix:'+', es:'Años con clientes activos', en:'Years with active clients' },
             { count: 16, es:'Operadores estratégicos', en:'Strategic operators' },
@@ -272,7 +272,7 @@ function HomePage({ lang, onNav, setIndustry }) {
         </Reveal>
 
         {/* closing band: testimonial-style statement + CTA */}
-        <div style={{ padding:'56px 0 80px', display:'grid', gridTemplateColumns:'1.4fr 1fr', gap: 64, alignItems:'center' }}>
+        <div className="pcc-grid-2" style={{ padding:'56px 0 80px', display:'grid', gridTemplateColumns:'1.4fr 1fr', gap: 64, alignItems:'center' }}>
           <Reveal kind="up" style={{ fontFamily:'var(--font-display)', fontStyle:'italic', fontWeight: 400, fontSize:'clamp(18px, 1.5vw, 22px)', lineHeight: 1.4, color:'rgba(255,255,255,0.85)', textWrap:'balance' }}>
             {lang === 'es'
               ? <>“Cuatro décadas protegiendo los activos que mueven la energía y el agua de tres países —<span style={{ color:'var(--accent)', fontStyle:'normal', fontWeight: 600 }}> con la misma firma de ingeniería detrás de cada proyecto.</span>”</>
@@ -300,7 +300,7 @@ function HomePage({ lang, onNav, setIndustry }) {
             <Button variant="ghost" onClick={() => onNav('experience')} icon="arrow-right">{C.projAll}</Button>
           </Reveal>
         </div>
-        <Reveal as="div" kind="fade" stagger style={{ display:'grid', gridTemplateColumns:'repeat(3, 1fr)', gap: 32 }}>
+        <Reveal as="div" kind="fade" stagger className="pcc-grid-3" style={{ display:'grid', gridTemplateColumns:'repeat(3, 1fr)', gap: 32 }}>
           {D.projects.slice(0, 3).map((p, i) => {
             const ind = D.industries.find(x => x.id === p.sector);
             return (

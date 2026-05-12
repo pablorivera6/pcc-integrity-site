@@ -6,7 +6,7 @@ function AboutPage({ lang, onNav }) {
   return <>
     <section style={{ background:'#fff', borderBottom:'1px solid var(--border)' }}>
       <Container wide style={{ padding:'120px 32px 96px' }}>
-        <div style={{ display:'grid', gridTemplateColumns:'1fr 1.6fr', gap: 80, alignItems:'start' }}>
+        <div className="pcc-page-header" style={{ display:'grid', gridTemplateColumns:'1fr 1.6fr', gap: 80, alignItems:'start' }}>
           <Reveal kind="right">
             <Eyebrow>{C.eyebrow}</Eyebrow>
             <div style={{ fontFamily:'var(--font-mono)', fontSize: 12, color:'var(--fg-4)', letterSpacing:'0.08em', textTransform:'uppercase', marginTop: 32 }}>EST. 1978 — BOGOTÁ, COLOMBIA</div>
