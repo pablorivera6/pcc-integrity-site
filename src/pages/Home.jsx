@@ -68,7 +68,7 @@ function HomePage({ lang, onNav, setIndustry }) {
               {[
                 { k: lang === 'es' ? 'Ingeniería' : 'Engineering', v: 'NACE CP-4' },
                 { k: lang === 'es' ? 'Cobertura' : 'Coverage',     v: 'CO · PE · USA' },
-                { k: lang === 'es' ? 'Trayectoria' : 'Track record', v: '47 años' },
+                { k: lang === 'es' ? 'Trayectoria' : 'Track record', v: '48 años' },
               ].map(x => (
                 <div key={x.k}>
                   <div style={{ fontFamily:'var(--font-mono)', fontSize: 10.5, letterSpacing:'0.16em', textTransform:'uppercase', color:'var(--fg-4)', marginBottom: 6, fontWeight: 600 }}>{x.k}</div>
@@ -206,7 +206,7 @@ function HomePage({ lang, onNav, setIndustry }) {
         {/* KPI strip */}
         <Reveal as="div" kind="fade" stagger className="pcc-grid-4" style={{ display:'grid', gridTemplateColumns:'repeat(4, 1fr)', gap: 0, borderTop:'1px solid rgba(255,255,255,0.12)', borderBottom:'1px solid rgba(255,255,255,0.12)', marginBottom: 64 }}>
           {[
-            { count: 40, suffix:'+', es:'Años con clientes activos', en:'Years with active clients' },
+            { count: 48, suffix:'+', es:'Años con clientes activos', en:'Years with active clients' },
             { count: 16, es:'Operadores estratégicos', en:'Strategic operators' },
             { count: 95, suffix:'%', es:'Tasa de recontratación', en:'Repeat-business rate' },
             { count: 3, es:'Países · CO · PE · USA', en:'Countries · CO · PE · USA' },

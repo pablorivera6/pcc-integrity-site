@@ -159,7 +159,7 @@ function Footer({ lang, onNav }) {
               </div>
             </div>
             <p style={{ fontSize: 14, lineHeight: 1.65, maxWidth: 360, margin: '0 0 24px', color:'rgba(255,255,255,0.65)' }}>
-              {C.footer.tagline} {lang === 'es' ? 'Más de 47 años protegiendo infraestructura crítica en Colombia, Perú y Estados Unidos.' : 'Over 47 years protecting critical infrastructure in Colombia, Peru and the United States.'}
+              {C.footer.tagline} {lang === 'es' ? 'Más de 48 años protegiendo infraestructura crítica en Colombia, Perú y Estados Unidos.' : 'Over 48 years protecting critical infrastructure in Colombia, Peru and the United States.'}
             </p>
             <div style={{ display:'flex', gap: 12 }}>
               {['linkedin','youtube','facebook'].map(n => (

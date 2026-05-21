@@ -84,7 +84,7 @@ function AboutPage({ lang, onNav }) {
       <Container wide>
         <Reveal kind="up" style={{ marginBottom: 48 }}>
           <Eyebrow>{lang === 'es' ? 'TRAYECTORIA' : 'TIMELINE'}</Eyebrow>
-          <h2 style={{ fontFamily:'var(--font-display)', fontWeight: 600, fontSize:'clamp(36px, 4vw, 56px)', lineHeight: 1.05, letterSpacing:'-0.02em', margin: 0 }}>{lang === 'es' ? '47 años de ingeniería continua.' : '47 years of continuous engineering.'}</h2>
+          <h2 style={{ fontFamily:'var(--font-display)', fontWeight: 600, fontSize:'clamp(36px, 4vw, 56px)', lineHeight: 1.05, letterSpacing:'-0.02em', margin: 0 }}>{lang === 'es' ? '48 años de ingeniería continua.' : '48 years of continuous engineering.'}</h2>
         </Reveal>
         <Reveal as="div" kind="fade" stagger style={{ display:'grid', gridTemplateColumns:'repeat(5, 1fr)', gap: 4, background:'var(--border)', borderTop:'1px solid var(--border)', borderBottom:'1px solid var(--border)' }}>
           {[

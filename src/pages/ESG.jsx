@@ -56,7 +56,7 @@ function ESGPage({ lang, onNav }) {
           <Reveal as="div" kind="fade" stagger delay={150} style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap: 1, background:'var(--border)', border:'1px solid var(--border)' }}>
             {[
               { num:'0', es:'Incidentes mayores 2024', en:'Major incidents 2024' },
-              { num:'47', es:'Años sin paro operativo', en:'Years without operational stop' },
+              { num:'48', es:'Años sin paro operativo', en:'Years without operational stop' },
               { num:'100%', es:'Trazabilidad documental', en:'Document traceability' },
               { num:'3', es:'Auditorías ISO anuales', en:'Annual ISO audits' },
             ].map((s, i) => (
