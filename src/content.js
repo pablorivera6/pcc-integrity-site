@@ -209,7 +209,7 @@ window.PCC_DATA = {
       esName: 'Oil & Gas',
       enName: 'Oil & Gas',
       icon: 'fuel',
-      photo: 'assets/marine-pcc.jpg',
+      photo: 'assets/industry-oil-gas.jpg',
       esSub: 'Ductos, refinerías y tanques de almacenamiento.',
       enSub: 'Pipelines, refineries and storage tanks.',
       esItems: [
@@ -237,7 +237,7 @@ window.PCC_DATA = {
       esName: 'Energía eléctrica',
       enName: 'Electric Power',
       icon: 'zap',
-      photo: 'assets/power-plant-pcc.png',
+      photo: 'assets/industry-power.jpg',
       esSub: 'Subestaciones, torres de transmisión y parques fotovoltaicos.',
       enSub: 'Substations, transmission towers and solar farms.',
       esItems: [
@@ -261,7 +261,7 @@ window.PCC_DATA = {
       esName: 'Infraestructura marítima',
       enName: 'Marine infrastructure',
       icon: 'anchor',
-      photo: 'assets/marine-jetty-pcc.jpg',
+      photo: 'assets/industry-marine.jpg',
       esSub: 'Muelles, pilotes, tablestacados y embarcaciones.',
       enSub: 'Piers, piles, sheet piling and vessels.',
       esItems: [
@@ -285,7 +285,7 @@ window.PCC_DATA = {
       esName: 'Industrial',
       enName: 'Industrial',
       icon: 'factory',
-      photo: 'assets/industrial-pcc.png',
+      photo: 'assets/industry-industrial.jpg',
       esSub: 'Plantas de proceso, acueductos y concreto armado.',
       enSub: 'Process plants, water networks and reinforced concrete.',
       esItems: [
@@ -303,6 +303,30 @@ window.PCC_DATA = {
         'Advanced inspections and monitoring',
       ],
       image: 'industrial',
+    },
+    {
+      id: 'water',
+      esName: 'Agua',
+      enName: 'Water',
+      icon: 'droplets',
+      photo: 'assets/industry-water.jpg',
+      esSub: 'Acueductos, plantas de tratamiento y redes de distribución.',
+      enSub: 'Water mains, treatment plants and distribution networks.',
+      esItems: [
+        'CP en tuberías de acueducto metálicas y concreto pretensado',
+        'Sistemas de protección para plantas de tratamiento de agua',
+        'Monitoreo de corrosión en redes de distribución',
+        'Inspección y diagnóstico de tuberías',
+        'Mitigación de interferencias eléctricas en redes hídricas',
+      ],
+      enItems: [
+        'CP for metallic and prestressed concrete water mains',
+        'Protection systems for water treatment plants',
+        'Corrosion monitoring in distribution networks',
+        'Pipeline inspection and diagnosis',
+        'AC interference mitigation in water networks',
+      ],
+      image: 'water',
     },
   ],
   serviceLines: [

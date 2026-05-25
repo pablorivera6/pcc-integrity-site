@@ -127,7 +127,7 @@ function HomePage({ lang, onNav, setIndustry }) {
               onMouseLeave={e => { e.currentTarget.querySelector('.ind-img').style.transform = 'scale(1)'; }}
             >
               <div className="ind-img" style={{ position:'absolute', inset: 0, transition:'transform 800ms var(--ease)' }}>
-                <IndustrialImage kind={ind.image} height="100%" dim={0.45}/>
+                <img src={ind.photo} alt={ind.esName} style={{ width:'100%', height:'100%', objectFit:'cover', objectPosition:'center', display:'block' }}/>
               </div>
               <div style={{ position:'absolute', inset:0, background:'linear-gradient(180deg, rgba(13,16,21,0.1) 0%, rgba(13,16,21,0.85) 100%)' }}/>
               <div className="pcc-arrow-host" style={{ position:'relative', height:'100%', minHeight: 420, padding: 40, display:'flex', flexDirection:'column', justifyContent:'space-between', color:'#fff' }}>
