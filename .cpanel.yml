@@ -2,6 +2,9 @@
 deployment:
   tasks:
     - export DEPLOYPATH=/home/proteccion/public_html/
-    - /bin/cp -r . $DEPLOYPATH
-    - /bin/rm -rf $DEPLOYPATH/.git
-    - /bin/rm -f $DEPLOYPATH/.cpanel.yml
+    - /bin/cp -R assets $DEPLOYPATH
+    - /bin/cp -R src $DEPLOYPATH
+    - /bin/cp -R styles $DEPLOYPATH
+    - /bin/cp -R uploads $DEPLOYPATH
+    - /bin/cp index.html $DEPLOYPATH
+    - /bin/cp .nojekyll $DEPLOYPATH
