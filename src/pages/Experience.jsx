@@ -2,10 +2,6 @@
 function ExperiencePage({ lang, onNav }) {
   const C = window.PCC_CONTENT[lang].experience;
   const D = window.PCC_DATA;
-  const { useState } = React;
-  const [filter, setFilter] = useState('all');
-
-  const filtered = filter === 'all' ? D.projects : D.projects.filter(p => p.sector === filter);
 
   return <>
     <section style={{ background:'#fff', borderBottom:'1px solid var(--border)' }}>
@@ -23,51 +19,23 @@ function ExperiencePage({ lang, onNav }) {
       </Container>
     </section>
 
-    {/* filter bar */}
-    <section style={{ background:'#fff', borderBottom:'1px solid var(--border)', position:'sticky', top: 76, zIndex: 30 }}>
-      <Container wide>
-        <div style={{ display:'flex', gap: 0, alignItems:'center' }}>
-          <span style={{ fontFamily:'var(--font-mono)', fontSize: 11, color:'var(--fg-4)', letterSpacing:'0.1em', textTransform:'uppercase', marginRight: 24 }}>{lang === 'es' ? 'FILTRAR ·' : 'FILTER ·'}</span>
-          {[{id:'all', es:'Todos', en:'All'}, ...D.industries.map(i => ({id:i.id, es:i.esName, en:i.enName}))].map(f => (
-            <button key={f.id} onClick={() => setFilter(f.id)} style={{
-              background:'transparent', border:'none', cursor:'pointer',
-              padding:'20px 18px',
-              fontSize: 13.5, fontWeight: 600, letterSpacing:'0.02em',
-              color: filter === f.id ? 'var(--fg-1)' : 'var(--fg-3)',
-              borderBottom: filter === f.id ? '2px solid var(--accent)' : '2px solid transparent',
-            }}>{lang === 'es' ? f.es : f.en}</button>
+    {/* project marquee - auto-scrolling photo + title */}
+    <section style={{ background:'#fff', padding:'80px 0 120px' }}>
+      <div className="pcc-marquee">
+        <div className="pcc-marquee-track" style={{ gap: 32, padding:'0 16px' }}>
+          {[...D.projects, ...D.projects].map((p, i) => (
+            <article key={i} style={{ flex:'0 0 auto', width: 420 }}>
+              <div style={{ overflow:'hidden', marginBottom: 20, aspectRatio:'4/3', background:'var(--bg-2)' }}>
+                <img src={p.cover} alt={lang === 'es' ? p.esTitle : p.enTitle}
+                     style={{ width:'100%', height:'100%', objectFit:'cover', display:'block' }}/>
+              </div>
+              <h3 style={{ fontFamily:'var(--font-display)', fontWeight: 600, fontSize: 20, margin: 0, color:'var(--fg-1)', letterSpacing:'-0.01em', textWrap:'balance', lineHeight: 1.25, whiteSpace:'normal' }}>
+                {lang === 'es' ? p.esTitle : p.enTitle}
+              </h3>
+            </article>
           ))}
         </div>
-      </Container>
-    </section>
-
-    {/* project list - editorial feed */}
-    <section style={{ background:'#fff' }}>
-      <Container wide>
-        {filtered.map((p, i) => {
-          const ind = D.industries.find(x => x.id === p.sector);
-          const reverse = i % 2 === 1;
-          return (
-            <Reveal as="article" kind="up" key={p.title + i} className="pcc-project-row" style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap: 0, borderBottom:'1px solid var(--border)' }}>
-              <div className="pcc-img-zoom" style={{ order: reverse ? 2 : 1, minHeight: 480, overflow:'hidden' }}>
-                <IndustrialImage kind={ind.image} height="100%" dim={0.3}/>
-              </div>
-              <div style={{ order: reverse ? 1 : 2, padding:'72px 64px', display:'flex', flexDirection:'column', justifyContent:'center' }}>
-                <div style={{ display:'flex', gap: 16, alignItems:'center', marginBottom: 20, fontFamily:'var(--font-mono)', fontSize: 11, letterSpacing:'0.1em', textTransform:'uppercase', color:'var(--fg-4)' }}>
-                  <span style={{ color:'var(--accent)', fontWeight: 600 }}>{lang === 'es' ? ind.esName : ind.enName}</span>
-                  <span>·</span>
-                  <span>{p.year}</span>
-                  <span>·</span>
-                  <span>{p.loc}</span>
-                </div>
-                <h2 style={{ fontFamily:'var(--font-display)', fontWeight: 600, fontSize:'clamp(28px, 3vw, 44px)', lineHeight: 1.1, letterSpacing:'-0.015em', margin:'0 0 20px', textWrap:'balance' }}>{p.title}</h2>
-                <p style={{ fontSize: 17, color:'var(--fg-3)', lineHeight: 1.6, margin:'0 0 32px', maxWidth: 540 }}>{lang === 'es' ? p.esScope : p.enScope}</p>
-                <div style={{ fontFamily:'var(--font-mono)', fontSize: 12, color:'var(--fg-4)' }}>CASE #{String(i+1).padStart(3, '0')}</div>
-              </div>
-            </Reveal>
-          );
-        })}
-      </Container>
+      </div>
     </section>
 
     {/* certifications */}

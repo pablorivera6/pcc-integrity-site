@@ -218,6 +218,9 @@
   .pcc-marquee:hover .pcc-marquee-track {
     animation-play-state: paused;
   }
+  .pcc-reach-track {
+    animation-duration: 45s !important;
+  }
 
   /* ---------- Stagger helper ---------- */
   .pcc-stagger > * { --reveal-delay: 0ms; }

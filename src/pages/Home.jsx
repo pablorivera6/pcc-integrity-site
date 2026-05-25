@@ -288,10 +288,10 @@ function HomePage({ lang, onNav, setIndustry }) {
       </Container>
     </section>
 
-    {/* PROJECTS / NEWS FEED */}
+    {/* PROJECTS / NEWS FEED — marquee */}
     <section style={{ padding:'120px 0', background:'#fff' }}>
-      <Container wide>
-        <div style={{ display:'flex', justifyContent:'space-between', alignItems:'end', marginBottom: 48 }}>
+      <Container wide style={{ marginBottom: 48 }}>
+        <div style={{ display:'flex', justifyContent:'space-between', alignItems:'end' }}>
           <Reveal kind="up">
             <Eyebrow>{C.projEyebrow}</Eyebrow>
             <h2 style={{ fontFamily:'var(--font-display)', fontWeight: 600, fontSize:'clamp(36px, 4vw, 56px)', lineHeight: 1.05, letterSpacing:'-0.02em', margin: 0 }}>{C.projTitle}</h2>
@@ -300,33 +300,59 @@ function HomePage({ lang, onNav, setIndustry }) {
             <Button variant="ghost" onClick={() => onNav('experience')} icon="arrow-right">{C.projAll}</Button>
           </Reveal>
         </div>
-        <Reveal as="div" kind="fade" stagger className="pcc-grid-3" style={{ display:'grid', gridTemplateColumns:'repeat(3, 1fr)', gap: 32 }}>
-          {D.projects.slice(0, 3).map((p, i) => {
-            const ind = D.industries.find(x => x.id === p.sector);
-            return (
-              <Reveal as="article" kind="up" key={i} style={{ cursor:'pointer' }}
-                onMouseEnter={e => e.currentTarget.querySelector('.proj-img').style.transform = 'scale(1.05)'}
-                onMouseLeave={e => e.currentTarget.querySelector('.proj-img').style.transform = 'scale(1)'}
-              >
-                <div style={{ overflow:'hidden', marginBottom: 24, aspectRatio:'4/3' }}>
-                  <div className="proj-img" style={{ height:'100%', transition:'transform 600ms var(--ease)' }}>
-                    <IndustrialImage kind={ind.image} height="100%" dim={0.35}/>
-                  </div>
-                </div>
-                <div style={{ display:'flex', gap: 12, alignItems:'center', marginBottom: 12, fontFamily:'var(--font-mono)', fontSize: 11, letterSpacing:'0.08em', textTransform:'uppercase', color:'var(--fg-4)' }}>
-                  <span style={{ color:'var(--accent)', fontWeight: 600 }}>{lang === 'es' ? ind.esName : ind.enName}</span>
-                  <span>·</span>
-                  <span>{p.year}</span>
-                  <span>·</span>
-                  <span>{p.loc}</span>
-                </div>
-                <h3 style={{ fontFamily:'var(--font-display)', fontWeight: 600, fontSize: 24, margin:'0 0 10px', color:'var(--fg-1)', letterSpacing:'-0.01em', textWrap:'balance' }}>{p.title}</h3>
-                <p style={{ fontSize: 14.5, color:'var(--fg-3)', lineHeight: 1.55, margin: 0 }}>{lang === 'es' ? p.esScope : p.enScope}</p>
-              </Reveal>
-            );
-          })}
-        </Reveal>
       </Container>
+      <div className="pcc-marquee">
+        <div className="pcc-marquee-track" style={{ gap: 32, padding:'0 16px' }}>
+          {[...D.projects, ...D.projects].map((p, i) => (
+            <article key={i} style={{ flex:'0 0 auto', width: 420 }}>
+              <div style={{ overflow:'hidden', marginBottom: 20, aspectRatio:'4/3', background:'var(--bg-2)' }}>
+                <img src={p.cover} alt={lang === 'es' ? p.esTitle : p.enTitle}
+                     style={{ width:'100%', height:'100%', objectFit:'cover', display:'block' }}/>
+              </div>
+              <h3 style={{ fontFamily:'var(--font-display)', fontWeight: 600, fontSize: 20, margin: 0, color:'var(--fg-1)', letterSpacing:'-0.01em', textWrap:'balance', lineHeight: 1.25, whiteSpace:'normal' }}>
+                {lang === 'es' ? p.esTitle : p.enTitle}
+              </h3>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    {/* GEOGRAPHIC REACH — minimal marquee */}
+    <section data-screen-label="Home/Reach" style={{ background:'#fff', borderTop:'1px solid var(--border)', borderBottom:'1px solid var(--border)', padding:'80px 0' }}>
+      <Container wide style={{ marginBottom: 40 }}>
+        <div style={{ display:'flex', alignItems:'baseline', gap: 24, flexWrap:'wrap' }}>
+          <Eyebrow>{lang === 'es' ? 'PRESENCIA' : 'PRESENCE'}</Eyebrow>
+          <span style={{ fontFamily:'var(--font-display)', fontSize: 18, color:'var(--fg-3)', letterSpacing:'-0.005em' }}>
+            {lang === 'es' ? 'Operamos a lo largo de las Américas y África Occidental.' : 'We operate across the Americas and West Africa.'}
+          </span>
+        </div>
+      </Container>
+      <div className="pcc-marquee">
+        <div className="pcc-marquee-track pcc-reach-track" style={{ gap: 56, padding:'0 28px', alignItems:'center' }}>
+          {[
+            ...Array(2).fill([
+              {code:'co', es:'Colombia',        en:'Colombia',       src:'assets/flags/co.webp'},
+              {code:'pe', es:'Perú',            en:'Peru',           src:'assets/flags/pe.png'},
+              {code:'us', es:'Estados Unidos',  en:'United States',  src:'assets/flags/us.svg'},
+              {code:'ec', es:'Ecuador',         en:'Ecuador',        src:'assets/flags/ec.png'},
+              {code:'ve', es:'Venezuela',       en:'Venezuela',      src:'assets/flags/ve.webp'},
+              {code:'ar', es:'Argentina',       en:'Argentina',      src:'assets/flags/ar.webp'},
+              {code:'cl', es:'Chile',           en:'Chile',          src:'assets/flags/cl.webp'},
+              {code:'gh', es:'Ghana',           en:'Ghana',          src:'assets/flags/gh.png'},
+            ]).flat()
+          ].map((f, i) => (
+            <div key={i} className="pcc-reach-item" style={{ display:'inline-flex', alignItems:'center', gap: 18, flex:'0 0 auto' }}>
+              <img src={f.src} alt={lang==='es'?f.es:f.en} width="44" height="30"
+                   style={{ display:'block', objectFit:'cover', width: 44, height: 30, border:'1px solid var(--pcc-gray-100)' }}/>
+              <span style={{ fontFamily:'var(--font-display)', fontSize:'clamp(28px, 3vw, 44px)', fontWeight: 500, letterSpacing:'-0.025em', color:'var(--fg-1)', lineHeight: 1 }}>
+                {lang==='es'?f.es:f.en}
+              </span>
+              <span style={{ width: 6, height: 6, borderRadius:'50%', background:'var(--accent)', marginLeft: 18, opacity: 0.5 }}></span>
+            </div>
+          ))}
+        </div>
+      </div>
     </section>
 
     {/* BIG CTA */}
