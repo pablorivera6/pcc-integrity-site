@@ -53,6 +53,42 @@ function SupplyPage({ lang, onNav }) {
       </Container>
     </section>
 
+    {/* IN-STOCK PRODUCTS */}
+    <section style={{ padding:'120px 0', background:'#fff', borderTop:'1px solid var(--border)' }}>
+      <Container wide>
+        <div style={{ display:'flex', justifyContent:'space-between', alignItems:'end', marginBottom: 48 }}>
+          <div>
+            <Eyebrow>{C.stockEyebrow}</Eyebrow>
+            <h2 style={{ fontFamily:'var(--font-display)', fontWeight: 600, fontSize:'clamp(36px, 4vw, 56px)', lineHeight: 1.05, letterSpacing:'-0.02em', margin: 0 }}>{C.stockTitle}</h2>
+            <p style={{ fontSize: 16, color:'var(--fg-3)', maxWidth: 620, marginTop: 16 }}>{C.stockSub}</p>
+          </div>
+        </div>
+        <div style={{ display:'flex', flexWrap:'wrap', gap: 24 }}>
+          {D.stockProducts.map((p) => (
+            <article key={p.sku} style={{ width: 320, border:'1px solid var(--border)', background:'#fff', padding: 28, display:'flex', flexDirection:'column', gap: 16, cursor:'pointer', transition:'background 200ms var(--ease), border-color 200ms var(--ease)' }}
+              onClick={() => onNav('contact')}
+              onMouseEnter={e => { e.currentTarget.style.background = 'var(--bg-2)'; e.currentTarget.style.borderColor = 'var(--pcc-gray-300)'; }}
+              onMouseLeave={e => { e.currentTarget.style.background = '#fff'; e.currentTarget.style.borderColor = 'var(--border)'; }}
+            >
+              <div style={{ height: 220, background:'var(--bg-2)', display:'flex', alignItems:'center', justifyContent:'center', overflow:'hidden', position:'relative' }}>
+                <span style={{ position:'absolute', top: 10, left: 10, zIndex: 2, fontFamily:'var(--font-mono)', fontSize: 9.5, fontWeight: 700, letterSpacing:'0.12em', textTransform:'uppercase', background:'var(--accent)', color:'#fff', padding:'4px 9px' }}>{lang === 'es' ? 'En stock' : 'In stock'}</span>
+                {p.photo
+                  ? <img src={p.photo} alt={lang === 'es' ? p.esName : p.enName} style={{ width:'100%', height:'100%', objectFit:'contain', padding: 16, display:'block' }}/>
+                  : <i data-lucide={p.icon} width="40" height="40"></i>}
+              </div>
+              <div style={{ fontFamily:'var(--font-mono)', fontSize: 10.5, color:'var(--accent)', fontWeight: 600, letterSpacing:'0.1em' }}>{p.category.toUpperCase()}</div>
+              <h3 style={{ fontFamily:'var(--font-display)', fontWeight: 600, fontSize: 19, margin: 0, color:'var(--fg-1)', lineHeight: 1.2 }}>{lang === 'es' ? p.esName : p.enName}</h3>
+              <p style={{ fontSize: 13, color:'var(--fg-3)', lineHeight: 1.5, margin: 0 }}>{lang === 'es' ? p.esDesc : p.enDesc}</p>
+              <div style={{ paddingTop: 12, borderTop:'1px solid var(--border)', display:'flex', justifyContent:'space-between', alignItems:'center' }}>
+                <Tag>{p.sku}</Tag>
+                <i data-lucide="arrow-up-right" width="14" height="14" style={{ color:'var(--fg-3)' }}></i>
+              </div>
+            </article>
+          ))}
+        </div>
+      </Container>
+    </section>
+
     {/* CATEGORIES grid */}
     <section style={{ padding:'120px 0', background:'var(--bg-2)' }}>
       <Container wide>

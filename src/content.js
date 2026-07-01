@@ -60,6 +60,9 @@ window.PCC_CONTENT = {
       categoriesTitle: 'Categorías',
       rectifiersTitle: 'PCC Rectifiers',
       rectifiersSub: 'Cinco configuraciones diseñadas para cada entorno operativo.',
+      stockEyebrow: 'INVENTARIO',
+      stockTitle: 'Productos en stock',
+      stockSub: 'Equipos de protección catódica disponibles en nuestro inventario.',
     },
     experience: {
       eyebrow: 'EXPERIENCIA',
@@ -160,6 +163,9 @@ window.PCC_CONTENT = {
       categoriesTitle: 'Categories',
       rectifiersTitle: 'PCC Rectifiers',
       rectifiersSub: 'Five configurations designed for every operating environment.',
+      stockEyebrow: 'INVENTORY',
+      stockTitle: 'Products in stock',
+      stockSub: 'Cathodic protection equipment available from our inventory.',
     },
     experience: {
       eyebrow: 'EXPERIENCE',
@@ -341,6 +347,10 @@ window.PCC_DATA = {
     { sku:'REC-MLT-48V-120A',esName:'Rectificador Múltiple', enName:'Multiple Rectifier', category:'Multi-circuito', icon:'layers-3', photo:'assets/rectifier-standard-pcc.jpg', esDesc:'Control simultáneo de hasta 6 circuitos independientes.', enDesc:'Simultaneous control of up to 6 independent circuits.' },
     { sku:'REC-AUT-24V-80A', esName:'Rectificador Automático', enName:'Automatic Rectifier', category:'Monitoreo', icon:'activity', photo:'assets/rectifier-automatic-pcc.png', esDesc:'Regulación automática de corriente con telemetría en tiempo real.', enDesc:'Automatic current regulation with real-time telemetry.' },
     { sku:'REC-SOL-24V-60A', esName:'Rectificador Solar', enName:'Solar Rectifier', category:'Off-grid', icon:'sun', photo:'assets/rectifier-solar-pcc.png', esDesc:'Paneles fotovoltaicos para zonas sin red eléctrica.', enDesc:'Photovoltaic panels for off-grid locations.' },
+  ],
+  // Productos en inventario / stock (se irán sumando: bridas de aislamiento, splice kits, cable, ánodos…)
+  stockProducts: [
+    { sku:'SPD-690-001', esName:'Isolating Spark Gap', enName:'Isolating Spark Gap', category:'Sobretensión', icon:'zap', photo:'assets/spark-gap-pcc.png', esDesc:'Descargador de aislamiento de estado sólido: aísla la DC de protección catódica y deriva hasta 100 kA de sobretensión a tierra. Sin mantenimiento.', enDesc:'Solid-state isolating spark gap: blocks cathodic protection DC and drains up to 100 kA of surge to ground. Maintenance-free.' },
   ],
   supplyCats: [
     { id:'rect', icon:'zap', es:'Rectificadores', en:'Rectifiers', esD:'Estándar, portátil, múltiple, automático y solar.', enD:'Standard, portable, multiple, automatic and solar.' },

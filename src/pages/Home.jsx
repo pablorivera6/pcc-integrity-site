@@ -3,9 +3,76 @@ function HomePage({ lang, onNav, setIndustry }) {
   const C = window.PCC_CONTENT[lang].home;
   const D = window.PCC_DATA;
 
+  // Hero carousel: 0 = Spark Gap (new product), 1 = Corrosion cover. Auto-advances.
+  const { useState, useEffect } = React;
+  const [heroSlide, setHeroSlide] = useState(0);
+  const [heroPaused, setHeroPaused] = useState(false);
+  useEffect(() => {
+    if (heroPaused) return;
+    const id = setTimeout(() => setHeroSlide(s => (s + 1) % 2), 6500);
+    return () => clearTimeout(id);
+  }, [heroSlide, heroPaused, lang]);
+
   return <>
-    {/* HERO */}
-    <section data-screen-label="Home/Hero" style={{ position:'relative', minHeight: 760, background:'#0d1015', color:'#fff', overflow:'hidden' }}>
+    {/* HERO CAROUSEL — Spark Gap (new) → Corrosion cover. Auto-slides. */}
+    <section data-screen-label="Home/HeroCarousel"
+      onMouseEnter={() => setHeroPaused(true)} onMouseLeave={() => setHeroPaused(false)}
+      style={{ position:'relative', minHeight: 760, background:'#0d1015', color:'#fff', overflow:'hidden' }}>
+      <div style={{ display:'flex', width:'200%', minHeight: 760, transform:`translateX(-${heroSlide * 50}%)`, transition:'transform 850ms var(--ease)' }}>
+
+      {/* ════ SLIDE 1 — ISOLATING SPARK GAP ════ */}
+      <div data-screen-label="Home/HeroSparkGap" style={{ flex:'0 0 50%', position:'relative', minHeight: 760, overflow:'hidden' }}>
+        {/* Right-side: spark discharge animation + product */}
+        <div className="pcc-hero-bg" style={{ position:'absolute', top: 0, bottom: 0, right: 0, width: '58%' }}>
+          <div style={{ position:'absolute', inset: 0 }}><SparkGapAnimation/></div>
+          <div style={{ position:'absolute', inset: 0, display:'flex', alignItems:'center', justifyContent:'center' }}>
+            <div style={{ position:'absolute', width:'58%', height:'58%', background:'radial-gradient(circle, rgba(213,0,50,0.22), transparent 70%)', filter:'blur(26px)', pointerEvents:'none' }}/>
+            <img src="assets/spark-gap-pcc.png?v=1" alt={lang==='es'?'PCC Integrity — Isolating Spark Gap SPD 690 001':'PCC Integrity — Isolating Spark Gap SPD 690 001'} className="pcc-float"
+              style={{ position:'relative', zIndex: 2, maxHeight: 520, width:'auto', maxWidth:'74%', filter:'drop-shadow(0 30px 60px rgba(0,0,0,0.6))' }}/>
+          </div>
+        </div>
+        {/* Left-side solid panel for text */}
+        <div style={{ position:'absolute', inset: 0, background:'linear-gradient(90deg, rgba(13,16,21,1) 0%, rgba(13,16,21,1) 38%, rgba(13,16,21,0.55) 50%, rgba(13,16,21,0) 62%)', pointerEvents:'none' }}/>
+        <div style={{ position:'absolute', left:0, right:0, bottom:0, height: 140, background:'linear-gradient(0deg, rgba(13,16,21,0.85) 0%, rgba(13,16,21,0) 100%)', pointerEvents:'none' }}/>
+        <Container wide style={{ position:'relative', paddingTop: 120, paddingBottom: 96, minHeight: 760, display:'flex', flexDirection:'column', justifyContent:'space-between' }}>
+          <div style={{ maxWidth: 620 }}>
+            <div style={{ fontFamily:'var(--font-mono)', fontSize: 11, letterSpacing:'0.18em', textTransform:'uppercase', color:'var(--accent)', fontWeight: 600, marginBottom: 18, display:'inline-flex', alignItems:'center', gap: 10 }}>
+              <span style={{ width: 7, height: 7, background:'var(--accent)', display:'inline-block' }} className="pcc-blink"/>
+              {lang === 'es' ? 'Nuevo producto · Isolating Spark Gap' : 'New product · Isolating Spark Gap'}
+            </div>
+            <h1 style={{ fontFamily:'var(--font-display)', fontWeight: 700, fontSize:'clamp(40px, 4.4vw, 68px)', lineHeight: 1.04, letterSpacing:'-0.025em', color:'#fff', margin:'0 0 24px', textWrap:'balance' }}>
+              {lang === 'es'
+                ? <>Aísla la DC. <span style={{ color:'var(--accent)' }}>Deriva el rayo.</span></>
+                : <>Isolate the DC. <span style={{ color:'var(--accent)' }}>Drain the lightning.</span></>}
+            </h1>
+            <p style={{ fontSize: 17, lineHeight: 1.55, color:'rgba(255,255,255,0.78)', maxWidth: 540, marginBottom: 28 }}>
+              {lang === 'es'
+                ? 'Isolating Spark Gap — protección catódica y protección contra sobretensiones en un solo dispositivo de estado sólido, sin mantenimiento.'
+                : 'Isolating Spark Gap — cathodic protection and surge protection in a single solid-state, maintenance-free device.'}
+            </p>
+            <div style={{ display:'flex', flexWrap:'wrap', gap: 10, marginBottom: 30 }}>
+              {[<>I<sub>imp</sub> 100 kA</>, 'Electro GDT', 'CE'].map((b, i) => (
+                <span key={i} style={{ display:'inline-flex', alignItems:'center', gap: 8, fontFamily:'var(--font-mono)', fontSize: 12, color:'rgba(255,255,255,0.86)', border:'1px solid rgba(255,255,255,0.18)', padding:'7px 12px' }}>
+                  <span style={{ width: 6, height: 6, background:'var(--accent)', display:'inline-block' }}/>{b}
+                </span>
+              ))}
+            </div>
+            <div style={{ display:'flex', gap: 12, flexWrap:'wrap' }}>
+              <Button variant="primary" onClick={() => onNav('contact')} icon="arrow-right">{lang === 'es' ? 'Solicitar información' : 'Request information'}</Button>
+              <Button variant="outlineDark" onClick={() => onNav('supply')}>{lang === 'es' ? 'Ver suministro' : 'See supply'}</Button>
+            </div>
+          </div>
+          <div style={{ display:'flex', justifyContent:'space-between', alignItems:'flex-end', marginTop: 60 }}>
+            <div style={{ fontFamily:'var(--font-mono)', fontSize: 11, color:'rgba(255,255,255,0.5)', letterSpacing:'0.12em', textTransform:'uppercase', display:'inline-flex', alignItems:'center', gap: 10 }}>
+              <span style={{ width: 8, height: 8, borderRadius: '50%', background: 'var(--accent)', display:'inline-block' }} className="pcc-blink"/>
+              SPD No. 690 001 · Surge Protective Device
+            </div>
+          </div>
+        </Container>
+      </div>
+
+      {/* ════ SLIDE 2 — CORROSION COVER (original) ════ */}
+      <div data-screen-label="Home/Hero" style={{ flex:'0 0 50%', position:'relative', minHeight: 760, overflow:'hidden' }}>
       {/* Right-side: animation as protagonist */}
       <div className="pcc-hero-bg" style={{ position:'absolute', top: 0, bottom: 0, right: 0, width: '58%' }}>
         <HeroBackgroundCycle lang={lang}/>
@@ -41,6 +108,17 @@ function HomePage({ lang, onNav, setIndustry }) {
           </div>
         </div>
       </Container>
+      </div>{/* /slide 2 */}
+
+      </div>{/* /track */}
+
+      {/* carousel dots */}
+      <div style={{ position:'absolute', bottom: 26, left:'50%', transform:'translateX(-50%)', zIndex: 6, display:'flex', gap: 9, alignItems:'center' }}>
+        {[0, 1].map(i => (
+          <button key={i} onClick={() => setHeroSlide(i)} aria-label={i === 0 ? 'Spark Gap' : 'Cobertura'}
+            style={{ width: i === heroSlide ? 30 : 9, height: 9, borderRadius: 5, border:'none', padding: 0, cursor:'pointer', background: i === heroSlide ? 'var(--accent)' : 'rgba(255,255,255,0.42)', transition:'all 350ms var(--ease)' }}/>
+        ))}
+      </div>
     </section>
 
     {/* BRAND STATEMENT — large logo as graphic + manifesto */}
