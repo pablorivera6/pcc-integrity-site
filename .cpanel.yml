@@ -7,4 +7,5 @@ deployment:
     - /bin/cp -R styles $DEPLOYPATH
     - /bin/cp -R uploads $DEPLOYPATH
     - /bin/cp index.html $DEPLOYPATH
+    - /bin/cp contact.php $DEPLOYPATH
     - /bin/cp .nojekyll $DEPLOYPATH

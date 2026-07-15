@@ -4,8 +4,31 @@ function ContactPage({ lang }) {
   const D = window.PCC_DATA;
   const { useState } = React;
   const [sent, setSent] = useState(false);
-  const [form, setForm] = useState({ first:'', last:'', email:'', company:'', subject:'', message:'' });
+  const [sending, setSending] = useState(false);
+  const [failed, setFailed] = useState(false);
+  const [form, setForm] = useState({ first:'', last:'', email:'', company:'', subject:'', message:'', website:'' });
   const F = C.form;
+
+  const submit = async (e) => {
+    e.preventDefault();
+    if (sending) return;
+    setSending(true);
+    setFailed(false);
+    try {
+      const res = await fetch('contact.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(form),
+      });
+      const data = await res.json().catch(() => null);
+      if (!res.ok || !data || !data.ok) throw new Error('send_failed');
+      setSent(true);
+    } catch (err) {
+      setFailed(true);
+    } finally {
+      setSending(false);
+    }
+  };
 
   const inp = {
     width:'100%', padding:'14px 16px', fontSize: 14,
@@ -40,7 +63,11 @@ function ContactPage({ lang }) {
               <i data-lucide="check-circle-2" width="48" height="48" style={{ color:'var(--accent)' }}></i>
               <h3 style={{ fontFamily:'var(--font-display)', fontSize: 28, marginTop: 24 }}>{F.sent}</h3>
             </div>
-          ) : (            <form onSubmit={e => { e.preventDefault(); setSent(true); }}>
+          ) : (            <form onSubmit={submit}>
+              {/* honeypot anti-spam — oculto para personas, los bots lo rellenan */}
+              <input type="text" name="website" tabIndex={-1} autoComplete="off" aria-hidden="true"
+                value={form.website} onChange={e => setForm({...form, website:e.target.value})}
+                style={{ position:'absolute', left:'-9999px', width:1, height:1, opacity:0 }}/>
               <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap: 24, marginBottom: 24 }}>
                 <div><label style={lab}>{F.first}</label><input style={inp} value={form.first} onChange={e => setForm({...form, first:e.target.value})} required/></div>
                 <div><label style={lab}>{F.last}</label><input style={inp} value={form.last} onChange={e => setForm({...form, last:e.target.value})} required/></div>
@@ -57,7 +84,15 @@ function ContactPage({ lang }) {
                 <label style={lab}>{F.message}</label>
                 <textarea style={{ ...inp, minHeight: 160, resize:'vertical' }} value={form.message} onChange={e => setForm({...form, message:e.target.value})} required/>
               </div>
-              <Button variant="primary" icon="arrow-right">{F.send}</Button>
+              {failed && (
+                <div role="alert" style={{ display:'flex', alignItems:'flex-start', gap: 10, background:'var(--accent-soft)', border:'1px solid var(--accent)', padding:'14px 16px', marginBottom: 20, fontSize: 13.5, lineHeight: 1.5, color:'var(--accent-deep)' }}>
+                  <i data-lucide="alert-triangle" width="16" height="16" style={{ flexShrink: 0, marginTop: 2 }}></i>
+                  <span>{F.error}</span>
+                </div>
+              )}
+              <Button variant="primary" icon="arrow-right" style={sending ? { opacity: 0.6, pointerEvents:'none' } : undefined}>
+                {sending ? F.sending : F.send}
+              </Button>
             </form>
           )}
         </Reveal>
