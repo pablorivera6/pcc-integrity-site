@@ -65,7 +65,56 @@ $company = mb_substr($noBreaks($company), 0, 150);
 $subject = mb_substr($noBreaks($subject), 0, 150);
 $message = mb_substr($message, 0, MAX_MESSAGE);
 
-$name  = $first . ' ' . $last;
+$name = $first . ' ' . $last;
+$ip   = (string)($_SERVER['REMOTE_ADDR'] ?? '—');
+
+/**
+ * Histórico de leads.
+ * Se guarda ANTES de enviar el correo: si el envío falla, la solicitud no se pierde.
+ * El CSV vive FUERA de public_html para que no sea descargable desde internet.
+ */
+$docRoot = (string)($_SERVER['DOCUMENT_ROOT'] ?? '');
+$logDir  = ($docRoot !== '' && is_dir($docRoot))
+    ? dirname($docRoot) . '/leads-privados'
+    : __DIR__ . '/leads-privados';
+
+if (!is_dir($logDir)) {
+    @mkdir($logDir, 0700, true);
+}
+// Red de seguridad: si el directorio quedara dentro de la web, bloquea el acceso HTTP.
+if (is_dir($logDir) && !file_exists($logDir . '/.htaccess')) {
+    @file_put_contents($logDir . '/.htaccess', "Require all denied\nDeny from all\n");
+}
+
+// Evita inyección de fórmulas al abrir el CSV en Excel.
+$csvSafe = static function (string $value): string {
+    return preg_match('/^[=+\-@\t\r]/', $value) === 1 ? "'" . $value : $value;
+};
+
+$csvPath = $logDir . '/leads.csv';
+$isNew   = !file_exists($csvPath);
+$handle  = @fopen($csvPath, 'ab');
+
+if ($handle !== false) {
+    if (flock($handle, LOCK_EX)) {
+        if ($isNew) {
+            fwrite($handle, "\xEF\xBB\xBF"); // BOM: tildes correctas en Excel
+            fputcsv($handle, ['Fecha', 'Nombre', 'Apellido', 'Correo', 'Empresa', 'Asunto', 'Mensaje', 'IP']);
+        }
+        fputcsv($handle, array_map($csvSafe, [
+            date('Y-m-d H:i:s'), $first, $last, $email,
+            $company !== '' ? $company : '—',
+            $subject !== '' ? $subject : '—',
+            $message, $ip,
+        ]));
+        fflush($handle);
+        flock($handle, LOCK_UN);
+    }
+    fclose($handle);
+} else {
+    error_log('[contact.php] no se pudo escribir el histórico en ' . $csvPath);
+}
+
 $title = 'Nueva solicitud web — ' . $name . ($subject !== '' ? ' — ' . $subject : '');
 $title = function_exists('mb_encode_mimeheader')
     ? mb_encode_mimeheader($title, 'UTF-8')
@@ -86,7 +135,7 @@ $body = implode("\n", [
     '',
     str_repeat('=', 40),
     'Fecha: ' . date('Y-m-d H:i:s'),
-    'IP:    ' . ($_SERVER['REMOTE_ADDR'] ?? '—'),
+    'IP:    ' . $ip,
 ]);
 
 // From debe ser del propio dominio (SPF). El correo del cliente va en Reply-To.

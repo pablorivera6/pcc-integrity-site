@@ -1,2 +1,6 @@
 .claude/
 .DS_Store
+
+# Datos de clientes — nunca deben subirse al repositorio (es público)
+leads-privados/
+leads.csv
