@@ -94,6 +94,7 @@ $csvSafe = static function (string $value): string {
 $csvPath = $logDir . '/leads.csv';
 $isNew   = !file_exists($csvPath);
 $handle  = @fopen($csvPath, 'ab');
+$saved   = false;
 
 if ($handle !== false) {
     if (flock($handle, LOCK_EX)) {
@@ -109,6 +110,7 @@ if ($handle !== false) {
         ]));
         fflush($handle);
         flock($handle, LOCK_UN);
+        $saved = true;
     }
     fclose($handle);
 } else {
@@ -152,8 +154,8 @@ $sent = mail(RECIPIENTS, $title, $body, $headers, '-f' . FROM_ADDR);
 if (!$sent) {
     error_log('[contact.php] mail() falló para ' . $email);
     http_response_code(500);
-    echo json_encode(['ok' => false, 'error' => 'send_failed']);
+    echo json_encode(['ok' => false, 'error' => 'send_failed', 'saved' => $saved]);
     exit;
 }
 
-echo json_encode(['ok' => true]);
+echo json_encode(['ok' => true, 'saved' => $saved]);
